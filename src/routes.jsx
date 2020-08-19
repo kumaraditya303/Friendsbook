@@ -1,15 +1,15 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import Login from "./components/Login";
 
-import Layout from './components/Layout'
 
 export const Hoc = props => props.children;
 
 
 const Router = () => (
-  <Hoc>
-    <Route path="/" component={Layout} />
-  </Hoc>
+
+  <Route exact path='/login' component={Login} />
+
 );
 
 export default Router;

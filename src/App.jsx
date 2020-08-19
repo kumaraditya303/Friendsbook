@@ -1,7 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
 import 'jquery';
 import 'popper.js';
-import 'bootstrap';
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
