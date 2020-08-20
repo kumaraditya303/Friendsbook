@@ -1,10 +1,10 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap';
-import 'jquery';
-import 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle';
+import 'jquery/dist/jquery.slim';
+import 'popper.js/dist/umd/popper';
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
+import './App.scss';
 import Layout from "./components/Layout";
 import BaseRouter from "./routes";
 import * as actions from "./store/actions/auth";
