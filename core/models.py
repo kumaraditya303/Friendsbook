@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -43,14 +43,9 @@ class UserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractUser):
+    username = None
     email = models.EmailField(_('email address'), unique=True)
-    is_staff = models.BooleanField(_('staff status'), default=False,
-                                   help_text='Designates whether the user can log into this admin site.')
-
-    is_active = models.BooleanField(default=True)
-    date_joined = models.DateTimeField(default=timezone.now)
-    dob = models.DateField(blank=True, null=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
