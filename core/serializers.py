@@ -14,6 +14,5 @@ class UserSerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('email', 'password', 'is_staff',)
-        extra_kwargs = {'password': {'write_only': True},
-                        'is_staff': {'read_only': True}}
+        fields = ('email', 'password')
+        extra_kwargs = {'password': {'write_only': True}, }
