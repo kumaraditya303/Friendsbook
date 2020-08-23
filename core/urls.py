@@ -4,10 +4,10 @@
 from django.urls import path
 from rest_framework.authtoken import views
 
-from core.views import LogoutAPIView, UserCreateAPIView
+from core.views import LogoutAPIView, UserCreateAPIView, UserObtainToken
 
 urlpatterns = [
-    path('login/', views.obtain_auth_token),
-    path('register/', UserCreateAPIView.as_view()),
-    path('logout/', LogoutAPIView.as_view())
+    path('login/',  UserObtainToken.as_view(), name='login'),
+    path('register/', UserCreateAPIView.as_view(), name='register'),
+    path('logout/', LogoutAPIView.as_view(), name='logout'),
 ]

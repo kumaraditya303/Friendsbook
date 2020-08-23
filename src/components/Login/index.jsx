@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import { authLogin } from '../../store/actions/auth';
 import styles from './style.module.scss';
 export class Login extends Component {
@@ -18,6 +19,10 @@ export class Login extends Component {
     }
     render() {
         return (<Fragment>
+            {this.props.token ?
+                <Redirect to='/' />
+                : null
+            }
             <div className="container jumbotron ">
                 <h1 className={`${styles.h1} text-center text-primary mb-5`}>Friendsbook</h1>
                 <div className="d-flex justify-content-center h-100">
@@ -54,11 +59,18 @@ export class Login extends Component {
     }
 }
 
+Login.propTypes = {
+    error: PropTypes.string,
+    loading: PropTypes.bool,
+    token: PropTypes.string,
+    login: PropTypes.func,
+}
+
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
         error: state.auth.error,
-        token: state.auth.token,
+        token: state.auth.token
     }
 }
 const mapDispatchToProps = dispatch => {

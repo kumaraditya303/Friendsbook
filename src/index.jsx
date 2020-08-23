@@ -6,20 +6,13 @@ import thunk from "redux-thunk";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import authReducer from "./store/reducers/auth";
-
-
-
 const rootReducer = combineReducers({
   auth: authReducer
 });
-
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
-
-const app = (
+ReactDOM.render(
   <Provider store={store}>
     <App />
-  </Provider>
-);
-
-ReactDOM.render(app, document.getElementById("root"));
+  </Provider>,
+  document.getElementById("root"));
 registerServiceWorker();

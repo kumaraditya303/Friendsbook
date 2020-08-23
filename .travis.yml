@@ -12,20 +12,16 @@ jobs:
       language: python
       python:
         - "3.8"
-      install: pip install -r requirements.txt
-      script: pytest 
+      install:
+        - pip install -r requirements.txt
+        - pip install pytest pytest-django coverage
+      script: 
+        - coverage run --source=. manage.py test
+        - coverage report -m 
+      
     - stage: Test Node.js
       language: node_js
       node_js:
         - "14"
       install: npm i
       script: npm test
-    - stage: Production
-      python: "3.8"
-      node_js: "14"
-      install:
-        - pip install -r requirements.txt
-        - npm i
-      script:
-        - npm run build
-        - python manage.py collectstatic --no-input

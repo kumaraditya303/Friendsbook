@@ -6,7 +6,7 @@ from django.utils.translation import gettext as _
 
 class UserManager(BaseUserManager):
     """
-    Custom user model manager where email is the unique identifiers
+    User model manager where email is the unique identifiers
     for authentication instead of usernames.
     """
 
@@ -38,10 +38,18 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    """
+    User model where email is the unique identifiers
+    for authentication instead of usernames.
+    """
+
     username = None
+    first_name = models.CharField(_('first name'), max_length=150, blank=False)
+    last_name = models.CharField(_('last name'), max_length=150, blank=False)
     email = models.EmailField(_('email address'), unique=True)
+    dob = models.DateField(_('date of birth'), blank=False, null=True)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['dob']
 
     objects = UserManager()
 

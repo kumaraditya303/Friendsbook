@@ -7,8 +7,8 @@ const Hoc = props => props.children;
 
 const Router = () => (
   <Hoc>
-    <Route exact path="/login" component={Login} />
-    <Route exact path='/register' component={Register} />
+    <Route exact path="/login/:next?" component={Login} />
+    <Route exact path='/register/:next?' component={Register} />
   </Hoc>
 );
 
