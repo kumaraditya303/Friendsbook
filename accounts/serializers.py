@@ -1,6 +1,8 @@
+"""
+    Serializers for accounts app.
+"""
 from django.contrib.auth import get_user_model
 from rest_framework.serializers import ModelSerializer
-from rest_framework.validators import UniqueTogetherValidator
 
 
 class UserSerializer(ModelSerializer):
@@ -14,11 +16,11 @@ class UserSerializer(ModelSerializer):
         Function to create User.
         """
         user = get_user_model().objects.create(**validated_data)
-        user.set_password(validated_data['password'])
+        user.set_password(validated_data["password"])
         user.save()
         return user
 
     class Meta:
         model = get_user_model()
-        fields = ('first_name', 'last_name', 'email', 'password', 'dob')
-        extra_kwargs = {'password': {'write_only': True}, }
+        fields = ("first_name", "last_name", "email", "password", "dob", "image")
+        extra_kwargs = {"password": {"write_only": True}, "image": {"required": False}}

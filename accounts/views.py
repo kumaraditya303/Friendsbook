@@ -1,14 +1,14 @@
 """
-    Core API Views
+    API Views for Accounts app.
 """
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.authtoken.models import Token
-from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.authtoken.views import ObtainAuthToken
 
 from .serializers import UserSerializer
 
@@ -17,8 +17,11 @@ class UserCreateAPIView(CreateAPIView):
     """
     API View for User registration.
     """
+
     model = get_user_model()
-    permission_classes = [AllowAny, ]
+    permission_classes = [
+        AllowAny,
+    ]
     serializer_class = UserSerializer
 
     def post(self, request, *args, **kwargs):
@@ -30,7 +33,10 @@ class LogoutAPIView(APIView):
     """
     API View for User logout.
     """
-    permission_classes = [IsAuthenticated, ]
+
+    permission_classes = [
+        IsAuthenticated,
+    ]
 
     def get(self, request, **kwargs):
         request.user.auth_token.delete()
@@ -38,14 +44,15 @@ class LogoutAPIView(APIView):
 
 
 class UserObtainToken(ObtainAuthToken):
+    """
+    API View for User login.
+    """
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data,
-                                           context={'request': request})
+        serializer = self.serializer_class(
+            data=request.data, context={"request": request}
+        )
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
+        user = serializer.validated_data["user"]
         token, _ = Token.objects.get_or_create(user=user)
-        return Response({
-            'token': token.key,
-            'user': UserSerializer(token.user).data
-        })
+        return Response({"token": token.key, "user": UserSerializer(token.user).data})

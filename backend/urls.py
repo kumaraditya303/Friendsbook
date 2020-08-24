@@ -19,7 +19,8 @@ from django.views.generic import TemplateView
 
 # Serializers define the API representation.
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include(('core.urls', 'core'), namespace='api')),
-    re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
+    path("admin/", admin.site.urls),
+    path("api/", include(("accounts.urls", "accounts"), namespace="api")),
+    path("api/", include(("posts.urls", "posts"), namespace="apis")),
+    re_path(r"^.*", TemplateView.as_view(template_name="index.html")),
 ]
