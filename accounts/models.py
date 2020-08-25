@@ -52,7 +52,9 @@ class User(AbstractUser):
     last_name = models.CharField(_("last name"), max_length=150, blank=False)
     email = models.EmailField(_("email address"), unique=True)
     dob = models.DateField(_("date of birth"), blank=True, null=True)
-    image = models.ImageField(_("profile picture"), blank=True, null=True)
+    image = models.ImageField(
+        _("profile picture"), upload_to="images", blank=True, null=True
+    )
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
     objects = UserManager()

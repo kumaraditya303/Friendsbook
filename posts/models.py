@@ -1,8 +1,7 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import MinLengthValidator
 from django.db import models
 from django.utils.translation import gettext as _
-
-from django.core.validators import MinLengthValidator
 
 
 class Post(models.Model):
@@ -36,4 +35,4 @@ class Image(models.Model):
         verbose_name_plural = _("Images")
 
     def __str__(self):
-        return self.image.name
+        return self.image.url

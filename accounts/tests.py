@@ -3,14 +3,16 @@
 """
 
 from datetime import datetime
+from io import BytesIO
 
 from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 from django.test import TestCase
+from PIL import Image
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
-from tempfile import NamedTemporaryFile
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 
 class UserModelTests(TestCase):
@@ -67,6 +69,19 @@ class UserViewTests(APITestCase):
     Tests for User Views for user registration, login and logout.
     """
 
+    def setUp(self):
+        """
+        Setup function to create a image.
+        """
+        file = BytesIO()
+        image = Image.new("RGB", size=(100, 100), color=(155, 0, 0))
+        image.save(file, "jpeg")
+        file.name = "test.jpeg"
+        file.seek(0)
+        self.image = SimpleUploadedFile(
+            name="test.jpeg", content=file.read(), content_type="image/jpeg"
+        )
+
     def test_register(self):
         """
         Test for user registration.
@@ -80,7 +95,9 @@ class UserViewTests(APITestCase):
                 "email": "test@test.com",
                 "password": "foobar",
                 "dob": datetime.now().date(),
+                "image": self.image,
             },
+            format="multipart",
         )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

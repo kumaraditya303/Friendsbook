@@ -3,9 +3,8 @@
 """
 from django.urls import path
 
-from .views import PostsListAPIView, ImagesListAPIView
+from .views import PostCreateAPIView
 
 urlpatterns = [
-    path("list/", PostsListAPIView.as_view()),
-    path("lisst/", ImagesListAPIView.as_view()),
+    path("post/create/", PostCreateAPIView.as_view()),
 ]

@@ -12,7 +12,7 @@ class ImageSerializer(ModelSerializer):
 
 
 class PostSerializer(ModelSerializer):
-    images = ImageSerializer(many=True)
+    images = ImageSerializer(many=True, required=False)
 
     class Meta:
         model = Post
@@ -20,3 +20,12 @@ class PostSerializer(ModelSerializer):
         extra_kwargs = {
             "created": {"read_only": True},
         }
+
+    def create(self, validated_data):
+        images = validated_data.pop("images", None)
+        post = Post.objects.create(**validated_data)
+        if images:
+            for image in images:
+                Image.objects.create(post=post, **image)
+        return post
+
