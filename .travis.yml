@@ -16,7 +16,7 @@ jobs:
         - pip install -r requirements.txt
         - pip install coverage codecov
       script: 
-        - coverage manage.py test
+        - coverage run manage.py test
       after_success: codecov
       
     - stage: Test Node.js
