@@ -1,3 +1,7 @@
+asgiref==3.2.10
 Django==3.1.2
+Django-Accounts @ git+https://github.com/kumaraditya303/Django-Accounts
 djangorestframework==3.12.1
-pillow==7.2
+Pillow==7.2.0
+pytz==2020.1
+sqlparse==0.4.1
