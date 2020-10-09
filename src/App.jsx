@@ -1,43 +1,40 @@
-import 'bootstrap/dist/js/bootstrap.bundle';
-import 'jquery/dist/jquery.slim';
-import 'popper.js/dist/umd/popper';
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
+import 'bootstrap';
+import React, { Component, lazy, Suspense } from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.scss';
-import Layout from "./components/Layout";
-import BaseRouter from "./routes";
-import * as actions from "./store/actions/auth";
+import PrivateRoute from './utils/PrivateRoute';
+const Dashboard = lazy(() => import('./components/Dashboard'));
+const Login = lazy(() => import('./components/Login'));
+const Register = lazy(() => import('./components/Register'));
 
 class App extends Component {
-  componentDidMount() {
-    this.props.onTryAutoSignup();
-  }
-
-  render() {
-    return (
-      <Router>
-        <Layout {...this.props}>
-          <BaseRouter />
-        </Layout>
-      </Router>
-    );
-  }
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
+	render() {
+		return (
+			<Router>
+				<Suspense fallback={<div >Loading...</div>}>
+					<PrivateRoute
+						exact
+						path="/"
+						component={Dashboard}
+						authenticated={this.state.authenticated}
+					/>
+					<Route exact path="/login/:next?" component={Login} />
+					<Route exact path="/register/:next?" component={Register} />
+				</Suspense>
+			</Router>
+		);
+	}
 }
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.auth.token !== null
-  };
+const mapStateToProps = (state) => {
+	return {
+		authenticated: state.auth.authenticated,
+	};
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onTryAutoSignup: () => dispatch(actions.authCheckState())
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps)(App);
