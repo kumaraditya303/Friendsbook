@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { login } from '../../store/actions/auth';
-import styles from './style.module.scss';
 import Footer from '../Footer';
-export class Login extends Component {
+import styles from './style.module.scss';
+
+class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -21,18 +21,17 @@ export class Login extends Component {
 	render() {
 		return (
 			<Fragment>
-				{this.props.authenticated ? <Redirect to="/" /> : null}
 				<div className="container jumbotron ">
 					<h1 className={`${styles.h1} text-center text-primary mb-5`}>
 						Friendsbook
 					</h1>
 					<div className="d-flex justify-content-center h-100">
 						<div className={`${styles.card} text-center shadow`}>
-							{this.props.error ? (
+							{this.props.error && (
 								<div className="alert alert-danger fade show" role="alert">
 									{this.props.error.message}
 								</div>
-							) : null}
+							)}
 							<div className="card-header">
 								<h3 className="h3">Login </h3>
 							</div>
@@ -87,13 +86,6 @@ export class Login extends Component {
 	}
 }
 
-Login.propTypes = {
-	error: PropTypes.string,
-	loading: PropTypes.bool,
-	token: PropTypes.string,
-	login: PropTypes.func,
-};
-
 const mapStateToProps = (state) => {
 	return {
 		loading: state.auth.loading,
@@ -107,4 +99,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -54,3 +54,14 @@ export const register = (first_name, last_name, email, password, dob) => {
 			});
 	};
 };
+
+export const autoLogin = () => {
+	return (dispatch) => {
+		dispatch({ type: AUTH_START });
+		const authenticated = localStorage.getItem('token');
+		const user = JSON.parse(localStorage.getItem('user'));
+		if (authenticated)
+			dispatch({ type: AUTH_SUCCESS, authenticated: true, user });
+		else dispatch({ type: AUTH_FAIL });
+	};
+};

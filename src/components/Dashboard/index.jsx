@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Dashboard extends Component {
 	constructor(props) {
@@ -6,7 +7,14 @@ class Dashboard extends Component {
 		this.state = {};
 	}
 	render() {
-		return <h1>Hello</h1>;
+		return <h1>Hello {this.props.name}</h1>;
 	}
 }
-export default Dashboard;
+
+const mapStateToProps = (state) => {
+	return {
+		name: state.auth.user.email,
+	};
+};
+
+export default connect(mapStateToProps)(Dashboard)
