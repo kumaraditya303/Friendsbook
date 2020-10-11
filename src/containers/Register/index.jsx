@@ -1,23 +1,25 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { login } from '../../store/actions/auth';
-import Footer from '../Footer';
-import styles from './style.module.scss';
+import { register } from '../../store/actions/auth';
+import Footer from '../../components/Footer';
+import styles from '../Login/style.module.scss';
 
-class Login extends Component {
+class Register extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
 	}
+
 	handleChange = (event) => {
 		this.setState({ [event.target.name]: event.target.value });
 	};
 	handleSubmit = (event) => {
 		event.preventDefault();
-		const { email, password } = this.state;
-		this.props.login(email, password);
+		const { firstname, lastname, email, password, dob } = this.state;
+		this.props.signup(firstname, lastname, email, password, dob);
 	};
+
 	render() {
 		return (
 			<Fragment>
@@ -33,10 +35,33 @@ class Login extends Component {
 								</div>
 							)}
 							<div className="card-header">
-								<h3 className="h3">Login </h3>
+								<h3 className="h3">Register</h3>
 							</div>
 							<div className="card-body">
-								<form method="POST" onSubmit={this.handleSubmit}>
+								<form onSubmit={this.handleSubmit}>
+									<div className="row">
+										<div className="col">
+											<input
+												type="text"
+												name="firstname"
+												className="form-control"
+												placeholder="First name"
+												onChange={this.handleChange}
+												required
+											/>
+										</div>
+										<div className="col">
+											<input
+												type="text"
+												name="lastname"
+												className="form-control"
+												placeholder="Last name"
+												onChange={this.handleChange}
+												required
+											/>
+										</div>
+									</div>
+									<br />
 									<input
 										type="email"
 										name="email"
@@ -56,6 +81,21 @@ class Login extends Component {
 										required
 									/>
 									<br />
+									<div className="input-group">
+										<div className="input-group-prepend">
+											<div className="input-group-text">Date of birth</div>
+										</div>
+										<input
+											type="date"
+											name="dob"
+											className="form-control"
+											placeholder="Date of birth"
+											onChange={this.handleChange}
+											max="2002-01-01"
+											required
+										/>
+									</div>
+									<br />
 									{this.props.loading ? (
 										<div
 											className="spinner-border text-primary"
@@ -64,18 +104,15 @@ class Login extends Component {
 									) : (
 										<input
 											type="submit"
-											value="Login"
+											value="Register"
 											className="btn btn-block btn-primary"
 										/>
 									)}
 								</form>
 							</div>
 							<div className="card-footer">
-								<Link to="/forgot">Forgotten Password?</Link>
+								<Link to="/login/">Already have an account?</Link>
 								<br />
-								<Link to="/register" className="btn btn-outline-success btn-lg">
-									Create New Account
-								</Link>
 							</div>
 						</div>
 					</div>
@@ -93,10 +130,12 @@ const mapStateToProps = (state) => {
 		authenticated: state.auth.authenticated,
 	};
 };
+
 const mapDispatchToProps = (dispatch) => {
 	return {
-		login: (email, password) => dispatch(login(email, password)),
+		signup: (firstname, lastname, email, password, dob) =>
+			dispatch(register(firstname, lastname, email, password, dob)),
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

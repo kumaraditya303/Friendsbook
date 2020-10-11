@@ -8,13 +8,13 @@ import PrivateRoute from './utils/PrivateRoute';
 import PublicRoute from './utils/PublicRoute';
 import PropTypes from 'prop-types';
 const Dashboard = lazy(() =>
-	import(/* webpackChunkName: "dashboard" */ './components/Dashboard')
+	import(/* webpackChunkName: "dashboard" */ './containers/Dashboard')
 );
 const Login = lazy(() =>
-	import(/* webpackChunkName: "login" */ './components/Login')
+	import(/* webpackChunkName: "login" */ './containers/Login')
 );
 const Register = lazy(() =>
-	import(/* webpackChunkName: "register" */ './components/Register')
+	import(/* webpackChunkName: "register" */ './containers/Register')
 );
 
 class App extends Component {
