@@ -30,8 +30,8 @@ class App extends Component {
 			<BrowserRouter>
 				<Suspense fallback={<div>Loading...</div>}>
 					<Switch>
-						<PublicRoute exact path="/login/" component={Login} />
-						<PublicRoute exact path="/register/" component={Register} />
+						<PublicRoute exact path="/login/:next?" component={Login} />
+						<PublicRoute exact path="/register/:next?" component={Register} />
 						<PrivateRoute exact path="/" component={Dashboard} />
 					</Switch>
 				</Suspense>
