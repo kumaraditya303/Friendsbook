@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import authReducer from './reducers/auth';
-import postReducer from './reducers/posts';
+import authReducer from './auth/reducer';
+import postReducer from './post/reducer';
 
 const rootReducer = combineReducers({
 	auth: authReducer,

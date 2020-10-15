@@ -3,7 +3,7 @@ import {
 	AUTH_LOGOUT,
 	AUTH_START,
 	AUTH_SUCCESS,
-} from '../actionTypes';
+} from './types';
 
 const initialState = {
 	authenticated: false,

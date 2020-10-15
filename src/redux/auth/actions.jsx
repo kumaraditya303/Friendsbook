@@ -5,7 +5,7 @@ import {
 	AUTH_LOGOUT,
 	AUTH_START,
 	AUTH_SUCCESS,
-} from '../actionTypes';
+} from './types';
 
 export const logout = () => (dispatch) => {
 	localStorage.removeItem('token');

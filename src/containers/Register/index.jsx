@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { register } from '../../store/actions/auth';
+import { register } from '../../redux/auth/actions';
 import Footer from '../../components/Footer';
 import styles from '../Login/style.module.scss';
 

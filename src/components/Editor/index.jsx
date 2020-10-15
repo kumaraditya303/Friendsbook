@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Remarkable } from 'remarkable';
-import axios from '../../store/axios';
+import axios from '../../utils/axios';
 
 class Editor extends Component {
 	constructor(props) {

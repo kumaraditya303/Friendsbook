@@ -3,7 +3,8 @@ import React, { Component, lazy, Suspense } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import './App.scss';
-import { autoLogin } from './store/actions/auth';
+import { autoLogin } from './redux/auth/actions';
+import { fetchPosts } from './redux/post/actions';
 import PrivateRoute from './utils/PrivateRoute';
 import PublicRoute from './utils/PublicRoute';
 import PropTypes from 'prop-types';
@@ -24,6 +25,7 @@ class App extends Component {
 	}
 	componentDidMount() {
 		this.props.autoLogin();
+		this.props.fetchPosts();
 	}
 	render() {
 		return (
@@ -47,6 +49,7 @@ App.propTypes = {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		autoLogin: () => dispatch(autoLogin()),
+		fetchPosts: () => dispatch(fetchPosts()),
 	};
 };
 export default connect(null, mapDispatchToProps)(App);
