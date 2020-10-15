@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import store from './store/store';
+import store from './redux/store';
 
 ReactDOM.render(
-	<Provider store={store}>
-		<App />
-	</Provider>,
+	<React.StrictMode>
+		<Provider store={store}>
+			<App />
+		</Provider>
+	</React.StrictMode>,
 	document.getElementById('root')
 );
 registerServiceWorker();

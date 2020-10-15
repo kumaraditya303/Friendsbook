@@ -1,10 +1,11 @@
 """
-    URL Configuration for Accounts app.
+    URL Configuration for posts app.
 """
 from django.urls import path
 
-from .views import PostCreateAPIView
+from .views import PostListAPIView, PostCreateAPIView
 
 urlpatterns = [
+    path("post/", PostListAPIView.as_view()),
     path("post/create/", PostCreateAPIView.as_view()),
 ]
