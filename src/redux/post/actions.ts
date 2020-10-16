@@ -1,12 +1,13 @@
-import { POST_URL } from '../../constants';
-import { PostAction } from './types';
+import {Dispatch} from 'redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {POST_URL} from '../../constants';
 import axios from '../../utils/axios';
-import { Dispatch } from 'redux';
+import {PostAction, PostActionType, PostState, ThunkResult} from './types';
 
-export const fetchPosts = () => (dispatch: Dispatch) => {
-	dispatch({ type: PostAction.POST_START });
+export const fetchPosts = (): ThunkResult<void> => (dispatch: ThunkDispatch<PostState,undefined,PostActionType>) => {
+	dispatch({ type: PostAction.START });
 	axios
 		.get(POST_URL)
-		.then((res) => dispatch({ type: PostAction.POST_SUCCESS, posts: res.data }))
-		.catch((error) => dispatch({ type: PostAction.POST_FAIL, error }));
+		.then((res: any) => dispatch({ type: PostAction.SUCCESS, posts: res.data }))
+		.catch((error: string) => dispatch({ type: PostAction.FAIL, error }));
 };
