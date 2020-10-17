@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {RootState} from '../redux/store';
+import {RootState} from '../redux';
 
 const PrivateRoute = (props: any) => {
   const {authenticated} = props;

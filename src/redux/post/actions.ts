@@ -1,4 +1,3 @@
-import {Dispatch} from 'redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {POST_URL} from '../../constants';
 import axios from '../../utils/axios';

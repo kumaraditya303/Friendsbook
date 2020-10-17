@@ -11,7 +11,6 @@ const reducer = (state = State, action: PostActionType): PostState => {
     case PostAction.START:
       return {...state, loading: true};
     case PostAction.SUCCESS:
-      console.log(action);
       return {...state, posts: action.posts, loading: false};
     case PostAction.FAIL:
       return {...state, error: action.error, loading: false};

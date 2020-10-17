@@ -22,10 +22,9 @@ class PostSerializer(ModelSerializer):
         }
 
     def create(self, validated_data):
-        images = validated_data.pop("images", None)
+        images = self.context.get("view").request.data
         post = Post.objects.create(**validated_data)
         if images:
-            for image in images:
-                Image.objects.create(post=post, **image)
+            for image in images.values():
+                Image.objects.create(post=post, image=image)
         return post
-

@@ -22,8 +22,8 @@ export const login = (email: string, password: string): ThunkResult<void> => (
 		})
 		.then((res) => {
 			const token = res.data.token;
-			const user = JSON.stringify(res.data.user);
-			localStorage.setItem('user', user);
+			const user = res.data.user;
+			localStorage.setItem('user', JSON.stringify(user));
 			localStorage.setItem('token', token);
 			dispatch({ type: AuthAction.SUCCESS, authenticated: true, user });
 		})
@@ -37,7 +37,7 @@ export const register = (
 	last_name: string,
 	email: string,
 	password: string,
-	dob: any
+	dob: string
 ): ThunkResult<void> => (
 	dispatch: ThunkDispatch<AuthState, undefined, AuthActionType>
 ) => {
