@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.5.0",
-    "@typescript-eslint/parser": "^4.0.1",
+    "@typescript-eslint/parser": "^4.5.0",
     "eslint": "^6.6.0",
     "eslint-plugin-react": "^7.21.4",
     "npm-watch": "^0.7.0",
