@@ -1,5 +1,4 @@
-import { Action } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import {Action} from 'redux';
 
 export enum AuthAction {
 	START = 'AUTH_START',
@@ -20,9 +19,3 @@ export type AuthState = {
 	error?: string | null;
 	user?: Record<string, unknown>;
 };
-export type ThunkResult<R> = ThunkAction<
-	R,
-	AuthState,
-	undefined,
-	AuthActionType
->;

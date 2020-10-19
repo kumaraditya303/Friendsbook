@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { login } from '../../redux/auth/actions';
 import Footer from '../../components/Footer';
 import styles from './style.module.scss';
-
+import PropTypes from 'prop-types';
 class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -86,17 +86,19 @@ class Login extends Component {
 	}
 }
 
-const mapStateToProps = (state) => {
-	return {
-		loading: state.auth.loading,
-		error: state.auth.error,
-		authenticated: state.auth.authenticated,
-	};
+Login.propTypes = {
+	login: PropTypes.func,
+	error: PropTypes.object,
+	loading: PropTypes.bool,
 };
-const mapDispatchToProps = (dispatch) => {
-	return {
-		login: (email, password) => dispatch(login(email, password)),
-	};
-};
+
+const mapStateToProps = (state) => ({
+	loading: state.auth.loading,
+	error: state.auth.error,
+	authenticated: state.auth.authenticated,
+});
+const mapDispatchToProps = (dispatch) => ({
+	login: (email, password) => dispatch(login(email, password)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

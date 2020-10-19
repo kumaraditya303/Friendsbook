@@ -1,10 +1,15 @@
 import { Action } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+export interface Image {
+	id: number;
+	image: string;
+	created: string;
+}
 
 export interface Post {
+	id: number;
 	content: string;
 	created: string;
-	images: any;
+	images?: Image[];
 }
 export enum PostAction {
 	START = 'POST_START',
@@ -22,10 +27,3 @@ export type PostState = {
 	error?: string | null;
 	loading: boolean;
 };
-
-export type ThunkResult<R> = ThunkAction<
-	R,
-	PostState,
-	undefined,
-	PostActionType
->;

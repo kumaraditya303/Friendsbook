@@ -1,13 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Remarkable } from 'remarkable';
-import { POST_CREATE_URL } from '../../constants';
-import axios from '../../utils/axios';
-import style from './style.scss';
-
+import { linkify } from 'remarkable/linkify';
+import { createPost } from '../../redux/post/actions';
 class Editor extends Component {
 	constructor(props) {
 		super(props);
-		this.md = new Remarkable();
+		this.md = new Remarkable().use(linkify);
 		this.state = {
 			files: [],
 			value: 'Hello, **World**!',
@@ -22,107 +22,112 @@ class Editor extends Component {
 	};
 	handleSubmit = (event) => {
 		event.preventDefault();
-
-		let body = new FormData();
-		let count = 0;
-		for (let file of this.state.files) {
-			body.append(`image${++count}`, file);
-		}
-		body.append('content', this.md.render(this.state.value));
-
-		axios
-			.post(POST_CREATE_URL, body, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			})
-			.catch((error) => console.log(error));
+		this.props.createPost(
+			this.md.render(this.state.value),
+			this.state.files || []
+		);
 	};
 
 	handleFileChange = (event) => {
 		event.preventDefault();
-		this.setState({ files: [...event.target.files] }, () => {
-			console.log(this.state);
-		});
+		this.setState({ files: [...event.target.files] });
 	};
 
 	render() {
 		return (
-			<div className="MarkdownEditor">
-				<form onSubmit={this.handleSubmit} method="post">
+			<div className="container row">
+				<form
+					onSubmit={this.handleSubmit}
+					method="post"
+					className="pt-5 mb-5 col-6 offset-2"
+				>
 					<textarea
-						className="markdown-content"
+						className="form-control"
 						name="content"
-						cols="30"
-						rows="10"
+						cols={30}
+						rows={6}
 						defaultValue={this.state.value}
 						onChange={this.handleChange}
 					></textarea>
+
 					<input
+						className="form-control"
 						type="file"
 						name="images"
 						multiple
 						onChange={this.handleFileChange}
 					/>
+
 					<div
 						className="markdown-output"
 						dangerouslySetInnerHTML={this.getMarkup()}
-					></div>
-					<input type="submit" value="Submit" />
+					/>
+					<input
+						type="submit"
+						value="Post"
+						className="btn btn-primary btn-block"
+					/>
 				</form>
-
-				<div
-					id="carouselExampleControls"
-					className={`carousel slide ${style.carousel}`}
-					data-ride="carousel"
-				>
-					<div className="carousel-inner">
-						{this.state.files.map((file) => (
-							<div
-								className={
-									this.state.files[0].name === file.name
-										? 'carousel-item active'
-										: 'carousel-item'
-								}
-								key={file.name}
-							>
-								<img
+				{this.state.files.length > 0 && (
+					<div
+						id="carouselExampleControls"
+						className="carousel slide row col-6 offset-2"
+						data-ride="carousel"
+					>
+						<div className="carousel-inner">
+							{this.state.files.map((file) => (
+								<div
+									className={
+										this.state.files[0].name === file.name
+											? 'carousel-item active'
+											: 'carousel-item'
+									}
 									key={file.name}
-									src={URL.createObjectURL(file)}
-									alt="..."
-									className="d-block w-100"
-								/>
-							</div>
-						))}
+								>
+									<img
+										key={file.name}
+										src={URL.createObjectURL(file)}
+										alt="..."
+										className="d-block w-100"
+									/>
+								</div>
+							))}
+						</div>
+						<a
+							className="carousel-control-prev"
+							href="#carouselExampleControls"
+							role="button"
+							data-slide="prev"
+						>
+							<span
+								className="carousel-control-prev-icon"
+								aria-hidden="true"
+							></span>
+						</a>
+						<a
+							className="carousel-control-next"
+							href="#carouselExampleControls"
+							role="button"
+							data-slide="next"
+						>
+							<span
+								className="carousel-control-next-icon"
+								aria-hidden="true"
+							></span>
+						</a>
 					</div>
-					<a
-						className="carousel-control-prev"
-						href="#carouselExampleControls"
-						role="button"
-						data-slide="prev"
-					>
-						<span
-							className="carousel-control-prev-icon"
-							aria-hidden="true"
-						></span>
-						<span className="sr-only">Previous</span>
-					</a>
-					<a
-						className="carousel-control-next"
-						href="#carouselExampleControls"
-						role="button"
-						data-slide="next"
-					>
-						<span
-							className="carousel-control-next-icon"
-							aria-hidden="true"
-						></span>
-						<span className="sr-only">Next</span>
-					</a>
-				</div>
+				)}
 			</div>
 		);
 	}
 }
 
-export default Editor;
+Editor.propTypes = {
+	createPost: PropTypes.func,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+	createPost: (content, files) => dispatch(createPost(content, files)),
+});
+
+export default connect(null, mapDispatchToProps)(Editor);

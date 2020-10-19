@@ -1,17 +1,23 @@
 import axios from 'axios';
-import { ThunkDispatch } from 'redux-thunk';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { LOGIN_URL, REGISTRATION_URL } from '../../constants';
-import { AuthAction, AuthActionType, AuthState, ThunkResult } from './types';
+import { AuthAction, AuthActionType, AuthState } from './types';
 
-export const logout = (): ThunkResult<void> => (
-	dispatch: ThunkDispatch<AuthState, undefined, AuthActionType>
-) => {
+export const logout = (): ThunkAction<
+	void,
+	AuthState,
+	undefined,
+	AuthActionType
+> => (dispatch: ThunkDispatch<AuthState, undefined, AuthActionType>) => {
 	localStorage.removeItem('token');
 	localStorage.removeItem('user');
 	dispatch({ type: AuthAction.LOGOUT, authenticated: false });
 };
 
-export const login = (email: string, password: string): ThunkResult<void> => (
+export const login = (
+	email: string,
+	password: string
+): ThunkAction<void, AuthState, undefined, AuthActionType> => (
 	dispatch: ThunkDispatch<AuthState, undefined, AuthActionType>
 ) => {
 	dispatch({ type: AuthAction.START, authenticated: false });
@@ -38,7 +44,7 @@ export const register = (
 	email: string,
 	password: string,
 	dob: string
-): ThunkResult<void> => (
+): ThunkAction<void, AuthState, undefined, AuthActionType> => (
 	dispatch: ThunkDispatch<AuthState, undefined, AuthActionType>
 ) => {
 	dispatch({ type: AuthAction.START, authenticated: false });
@@ -58,9 +64,12 @@ export const register = (
 		});
 };
 
-export const autoLogin = (): ThunkResult<void> => (
-	dispatch: ThunkDispatch<AuthState, undefined, AuthActionType>
-) => {
+export const autoLogin = (): ThunkAction<
+	void,
+	AuthState,
+	undefined,
+	AuthActionType
+> => (dispatch: ThunkDispatch<AuthState, undefined, AuthActionType>) => {
 	dispatch({ type: AuthAction.START, authenticated: false });
 	const authenticated = localStorage.getItem('token');
 	const user = JSON.parse(localStorage.getItem('user'));

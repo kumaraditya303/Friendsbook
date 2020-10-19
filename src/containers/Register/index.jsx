@@ -1,15 +1,18 @@
+import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { register } from '../../redux/auth/actions';
 import Footer from '../../components/Footer';
+import { register } from '../../redux/auth/actions';
 import styles from '../Login/style.module.scss';
-
 class Register extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
+	state = {
+		firstname: '',
+		lastname: '',
+		email: '',
+		password: '',
+		dob: '',
+	};
 
 	handleChange = (event) => {
 		this.setState({ [event.target.name]: event.target.value });
@@ -122,20 +125,20 @@ class Register extends Component {
 		);
 	}
 }
-
-const mapStateToProps = (state) => {
-	return {
-		loading: state.auth.loading,
-		error: state.auth.error,
-		authenticated: state.auth.authenticated,
-	};
+Register.propTypes = {
+	loading: PropTypes.bool,
+	signup: PropTypes.func,
+	error: PropTypes.object,
 };
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		signup: (firstname, lastname, email, password, dob) =>
-			dispatch(register(firstname, lastname, email, password, dob)),
-	};
-};
+const mapStateToProps = (state) => ({
+	loading: state.auth.loading,
+	error: state.auth.error,
+	authenticated: state.auth.authenticated,
+});
 
+const mapDispatchToProps = (dispatch) => ({
+	signup: (firstname, lastname, email, password, dob) =>
+		dispatch(register(firstname, lastname, email, password, dob)),
+});
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
