@@ -1,4 +1,4 @@
-import {PostAction, PostActionType, PostState} from './types';
+import { PostAction, PostActionType, PostState } from "./types";
 
 const State: PostState = {
   posts: [],
@@ -6,14 +6,14 @@ const State: PostState = {
   loading: false,
 };
 
-const reducer = (state = State, action: PostActionType): PostState => {
+const reducer = (state = State, action: PostAction): PostState => {
   switch (action.type) {
-    case PostAction.START:
-      return {...state, loading: true};
-    case PostAction.SUCCESS:
-      return {...state, posts: action.posts, loading: false};
-    case PostAction.FAIL:
-      return {...state, error: action.error, loading: false};
+    case PostActionType.START:
+      return { ...state, loading: true };
+    case PostActionType.SUCCESS:
+      return { ...state, posts: action.posts, loading: false };
+    case PostActionType.FAIL:
+      return { ...state, error: action.error, loading: false };
     default:
       return state;
   }

@@ -1,6 +1,5 @@
-import React from 'react';
-import styles from './style.module.scss';
-
+import React from "react";
+import styles from "./style.module.scss";
 
 const Footer: React.FunctionComponent = () => (
   <div className="container">

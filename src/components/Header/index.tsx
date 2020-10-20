@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Header: React.FunctionComponent = () => (
   <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -16,7 +16,7 @@ const Header: React.FunctionComponent = () => (
     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
       <a className="navbar-brand" href="#">
         Hidden brand
-			</a>
+      </a>
       <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
         <li className="nav-item active">
           <a className="nav-link" href="#">
@@ -26,7 +26,7 @@ const Header: React.FunctionComponent = () => (
         <li className="nav-item">
           <a className="nav-link" href="#">
             Link
-					</a>
+          </a>
         </li>
         <li className="nav-item">
           <a
@@ -36,7 +36,7 @@ const Header: React.FunctionComponent = () => (
             aria-disabled="true"
           >
             Disabled
-					</a>
+          </a>
         </li>
       </ul>
       <form className="form-inline my-2 my-lg-0">
@@ -48,7 +48,7 @@ const Header: React.FunctionComponent = () => (
         />
         <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
           Search
-				</button>
+        </button>
       </form>
     </div>
   </nav>

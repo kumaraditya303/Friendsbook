@@ -1,22 +1,22 @@
-import 'bootstrap';
-import React, {Component, lazy, Suspense} from 'react';
-import {connect} from 'react-redux';
-import {BrowserRouter, Switch} from 'react-router-dom';
-import {AnyAction} from 'redux';
-import {ThunkDispatch} from 'redux-thunk';
-import {autoLogin} from './redux/auth/actions';
-import {fetchPosts} from './redux/post/actions';
-import {RootState} from './redux';
-import PrivateRoute from './utils/PrivateRoute';
-import PublicRoute from './utils/PublicRoute';
-const Dashboard = lazy(() =>
-  import(/* webpackChunkName: "dashboard" */ './containers/Dashboard')
+import "bootstrap";
+import React, { Component, lazy, Suspense } from "react";
+import { connect } from "react-redux";
+import { BrowserRouter, Switch } from "react-router-dom";
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import { autoLogin } from "./redux/auth/actions";
+import { fetchPosts } from "./redux/post/actions";
+import { RootState } from "./redux";
+import PrivateRoute from "./utils/PrivateRoute";
+import PublicRoute from "./utils/PublicRoute";
+const Dashboard = lazy(
+  () => import(/* webpackChunkName: "dashboard" */ "./containers/Dashboard")
 );
-const Login = lazy(() =>
-  import(/* webpackChunkName: "login" */ './containers/Login')
+const Login = lazy(
+  () => import(/* webpackChunkName: "login" */ "./containers/Login")
 );
-const Register = lazy(() =>
-  import(/* webpackChunkName: "register" */ './containers/Register')
+const Register = lazy(
+  () => import(/* webpackChunkName: "register" */ "./containers/Register")
 );
 
 interface Props {
@@ -35,8 +35,8 @@ class App extends Component<Props> {
       <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
-            <PublicRoute exact path="/login/:next?" component={Login} />
-            <PublicRoute exact path="/register/:next?" component={Register} />
+            <PublicRoute exact path="/login/:next?/" component={Login} />
+            <PublicRoute exact path="/register/:next?/" component={Register} />
             <PrivateRoute exact path="/" component={Dashboard} />
           </Switch>
         </Suspense>
@@ -45,7 +45,9 @@ class App extends Component<Props> {
   }
 }
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => ({
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<RootState, undefined, AnyAction>
+) => ({
   autoLogin: () => dispatch(autoLogin()),
   fetchPosts: () => dispatch(fetchPosts()),
 });
