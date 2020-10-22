@@ -2,3 +2,13 @@
 $font-family-sans-serif: "Ubuntu", sans-serif;
 $carousel-control-color: #000;
 @import "~bootstrap/scss/bootstrap.scss";
+.profile {
+  width: 48px;
+  height: 48px;
+  border-radius: 20px;
+  border: #000 2px solid;
+}
+.username {
+  font-size: large;
+  font-weight: bolder;
+}

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Editor from "../../components/Editor/index.jsx";
-import { RootState } from "../../redux/index.js";
-import { Post } from "../../redux/post/types.js";
+import Editor from "../../components/Editor/index";
+import { RootState } from "../../redux/index";
+import { Post } from "../../redux/post/types";
 
 interface Props {
   posts: Post[];
@@ -13,51 +13,94 @@ class Dashboard extends Component<Props> {
   state = {};
   render() {
     return (
-      <>
-        <div className="container">
-          <div className="media">
-            <img
-              className="align-self-start mr-3"
-              src={this.props.user.image}
-              alt="Generic placeholder image"
-            ></img>
-            <div className="media-body">
-              <div className="mt-0">Post Something...</div>
-              <Editor />
-            </div>
+      <div className="container">
+        <div className="media">
+          <img
+            className="align-self-start mt-5 mr-3 mb-5 profile"
+            src={this.props.user.image}
+            alt="..."
+            style={{
+              display: "inline",
+            }}
+          />
+          <span className="align-self-end ml-3 username">
+            {this.props.user.first_name} {this.props.user.last_name}
+          </span>
+
+          <div className="media-body ml-5">
+            <div className="mt-0">Post...</div>
+            <Editor />
           </div>
-          <div className="media">
-            <img
-              className="align-self-start mr-3"
-              src="..."
-              alt="Generic placeholder image"
-            />
-            <div className="media-body">
-              <h5 className="mt-0">Top-aligned media</h5>
-              <p>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-                nisi vulputate fringilla. Donec lacinia congue felis in
-                faucibus.
-              </p>
-              <p>
-                Donec sed odio dui. Nullam quis risus eget urna mollis ornare
-                vel eu leo. Cum sociis natoque penatibus et magnis dis
-                parturient montes, nascetur ridiculus mus.
-              </p>
-            </div>
-          </div>
-          {this.props.posts.map((post) => (
-            <div key={post.id}>
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
-              {post.images.map((image) => (
-                <img key={image.id} src={image.image} alt="..." />
-              ))}
-            </div>
-          ))}
         </div>
-      </>
+        {this.props.posts.map((post) => (
+          <div key={post.id} className="media">
+            <img
+              className="align-self-start mt-5 mr-3 mb-5 profile"
+              src={post.user.image}
+              alt="..."
+              style={{
+                display: "inline",
+              }}
+            />
+            <span className="align-self-end ml-3 username">
+              {post.user.first_name} {post.user.last_name}
+            </span>
+            <div
+              className="media-body"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
+            {post.images.length > 0 && (
+              <div
+                id={`carouselControls${post.id}`}
+                className="carousel slide row col-6 mb-5"
+                data-ride="carousel"
+              >
+                <div className="carousel-inner">
+                  {post.images.map((file) => (
+                    <div
+                      className={
+                        post.images[0] === file
+                          ? "carousel-item active"
+                          : "carousel-item"
+                      }
+                      key={file.id}
+                    >
+                      <img
+                        key={file.image}
+                        src={file.image}
+                        alt="..."
+                        className="d-block w-100"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <a
+                  className="carousel-control-prev"
+                  href={`#carouselControls${post.id}`}
+                  role="button"
+                  data-slide="prev"
+                >
+                  <span
+                    className="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                </a>
+                <a
+                  className="carousel-control-next"
+                  href={`#carouselControls${post.id}`}
+                  role="button"
+                  data-slide="next"
+                >
+                  <span
+                    className="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                </a>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     );
   }
 }

@@ -35,17 +35,17 @@ class Editor extends Component {
 
   render() {
     return (
-      <div className="container row">
+      <div className="container">
         <form
           onSubmit={this.handleSubmit}
           method="post"
-          className="pt-5 mb-5 col-6 offset-2"
+          className="row mb-5 col-6"
         >
           <textarea
             className="form-control"
             name="content"
             cols={30}
-            rows={6}
+            rows={3}
             defaultValue={this.state.value}
             onChange={this.handleChange}
           ></textarea>
@@ -59,64 +59,65 @@ class Editor extends Component {
           />
 
           <div
-            className="markdown-output"
+            className="container-fluid mt-5"
             dangerouslySetInnerHTML={this.getMarkup()}
           />
+
+          {this.state.files.length > 0 && (
+            <div
+              id="carouselControls"
+              className="row carousel slide mb-5"
+              data-ride="carousel"
+            >
+              <div className="carousel-inner">
+                {this.state.files.map((file) => (
+                  <div
+                    className={
+                      this.state.files[0].name === file.name
+                        ? "carousel-item active"
+                        : "carousel-item"
+                    }
+                    key={file.name}
+                  >
+                    <img
+                      key={file.name}
+                      src={URL.createObjectURL(file)}
+                      alt="..."
+                      className="d-block w-100"
+                    />
+                  </div>
+                ))}
+              </div>
+              <a
+                className="carousel-control-prev"
+                href="#carouselControls"
+                role="button"
+                data-slide="prev"
+              >
+                <span
+                  className="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+              </a>
+              <a
+                className="carousel-control-next"
+                href="#carouselControls"
+                role="button"
+                data-slide="next"
+              >
+                <span
+                  className="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+              </a>
+            </div>
+          )}
           <input
             type="submit"
             value="Post"
-            className="btn btn-primary btn-block"
+            className="btn btn-primary btn-block mb-5"
           />
         </form>
-        {this.state.files.length > 0 && (
-          <div
-            id="carouselExampleControls"
-            className="carousel slide row col-6 offset-2"
-            data-ride="carousel"
-          >
-            <div className="carousel-inner">
-              {this.state.files.map((file) => (
-                <div
-                  className={
-                    this.state.files[0].name === file.name
-                      ? "carousel-item active"
-                      : "carousel-item"
-                  }
-                  key={file.name}
-                >
-                  <img
-                    key={file.name}
-                    src={URL.createObjectURL(file)}
-                    alt="..."
-                    className="d-block w-100"
-                  />
-                </div>
-              ))}
-            </div>
-            <a
-              className="carousel-control-prev"
-              href="#carouselExampleControls"
-              role="button"
-              data-slide="prev"
-            >
-              <span
-                className="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-            </a>
-            <a
-              className="carousel-control-next"
-              href="#carouselExampleControls"
-              role="button"
-              data-slide="next"
-            >
-              <span
-                className="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-            </a>
-          </div>
-        )}
       </div>
     );
   }

@@ -1,4 +1,4 @@
-import { Action } from "redux";
+import { Action } from 'redux';
 export interface Image {
   id: number;
   image: string;
@@ -10,11 +10,12 @@ export interface Post {
   content: string;
   created: string;
   images?: Image[];
+  user?: any;
 }
 export enum PostActionType {
-  START = "POST_START",
-  FAIL = "POST_FAIL",
-  SUCCESS = "POST_SUCCESS",
+  START = 'POST_START',
+  FAIL = 'POST_FAIL',
+  SUCCESS = 'POST_SUCCESS',
 }
 export interface PostAction extends Action<PostActionType> {
   posts?: Post[];
