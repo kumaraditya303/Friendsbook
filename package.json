@@ -14,7 +14,7 @@
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.6",
     "@types/remarkable": "^1.7.4",
-    "axios": "^0.20.0",
+    "axios": "^0.21.0",
     "bootstrap": "^5.0.0-alpha2",
     "node-sass": "^4.14.1",
     "popper.js": "^1.16.1",
