@@ -41,6 +41,7 @@ export const createPost = (
     .post(POST_CREATE_URL, body, {
       headers: {
         "Content-Type": "multipart/form-data",
+        Authorization: `Token ${localStorage.getItem("token")}`,
       },
     })
     .then(() => dispatch(fetchPosts()))
