@@ -1,22 +1,22 @@
-import "bootstrap";
-import React, { Component, lazy, Suspense } from "react";
-import { connect } from "react-redux";
-import { BrowserRouter, Switch } from "react-router-dom";
-import { AnyAction } from "redux";
-import { ThunkDispatch } from "redux-thunk";
-import { autoLogin } from "./redux/auth/actions";
-import { fetchPosts } from "./redux/post/actions";
-import { RootState } from "./redux";
-import PrivateRoute from "./utils/PrivateRoute";
-import PublicRoute from "./utils/PublicRoute";
+import 'bootstrap';
+import React, { Component, lazy, Suspense } from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter, Switch } from 'react-router-dom';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { autoLogin } from './redux/auth/actions';
+import { fetchPosts } from './redux/post/actions';
+import { RootState } from './redux';
+import PrivateRoute from './utils/PrivateRoute';
+import PublicRoute from './utils/PublicRoute';
 const Dashboard = lazy(
-  () => import(/* webpackChunkName: "dashboard" */ "./containers/Dashboard")
+  () => import(/* webpackChunkName: "dashboard" */ './containers/Dashboard')
 );
 const Login = lazy(
-  () => import(/* webpackChunkName: "login" */ "./containers/Login")
+  () => import(/* webpackChunkName: "login" */ './containers/Login')
 );
 const Register = lazy(
-  () => import(/* webpackChunkName: "register" */ "./containers/Register")
+  () => import(/* webpackChunkName: "register" */ './containers/Register')
 );
 
 interface Props {
@@ -33,7 +33,20 @@ class App extends Component<Props> {
   render() {
     return (
       <BrowserRouter>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div className="container">
+              <div className="row h-100 align-self-center justify-content-center">
+                <div
+                  className="col-md-auto spinner-border text-primary"
+                  role="status"
+                >
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </div>
+          }
+        >
           <Switch>
             <PublicRoute exact path="/login/:next?/" component={Login} />
             <PublicRoute exact path="/register/:next?/" component={Register} />

@@ -1,7 +1,7 @@
-import axios from "axios";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { LOGIN_URL, REGISTRATION_URL } from "../../constants";
-import { AuthAction, AuthActionType, AuthState } from "./types";
+import axios from 'axios';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { LOGIN_URL, REGISTRATION_URL } from '../../constants';
+import { AuthAction, AuthActionType, AuthState } from './types';
 
 export const logout = (): ThunkAction<
   void,
@@ -9,8 +9,7 @@ export const logout = (): ThunkAction<
   undefined,
   AuthAction
 > => (dispatch: ThunkDispatch<AuthState, undefined, AuthAction>) => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
+  localStorage.clear();
   dispatch({ type: AuthActionType.LOGOUT, authenticated: false });
 };
 
@@ -29,8 +28,8 @@ export const login = (
     .then((res) => {
       const token = res.data.token;
       const user = res.data.user;
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("token", token);
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', token);
       dispatch({ type: AuthActionType.SUCCESS, authenticated: true, user });
     })
     .catch((error) => {
@@ -71,8 +70,8 @@ export const autoLogin = (): ThunkAction<
   AuthAction
 > => (dispatch: ThunkDispatch<AuthState, undefined, AuthAction>) => {
   dispatch({ type: AuthActionType.START, authenticated: false });
-  const authenticated = localStorage.getItem("token");
-  const user = JSON.parse(localStorage.getItem("user"));
+  const authenticated = localStorage.getItem('token');
+  const user = JSON.parse(localStorage.getItem('user'));
   if (authenticated)
     dispatch({ type: AuthActionType.SUCCESS, authenticated: true, user });
   else

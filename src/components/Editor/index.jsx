@@ -1,16 +1,16 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Remarkable } from "remarkable";
-import { linkify } from "remarkable/linkify";
-import { createPost } from "../../redux/post/actions";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Remarkable } from 'remarkable';
+import { linkify } from 'remarkable/linkify';
+import { createPost } from '../../redux/post/actions';
 class Editor extends Component {
   constructor(props) {
     super(props);
     this.md = new Remarkable().use(linkify);
     this.state = {
       files: [],
-      value: "Hello, **World**!",
+      value: 'Hello, **World**!',
     };
   }
   handleChange = (event) => {
@@ -21,10 +21,8 @@ class Editor extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.createPost(
-      this.md.render(this.state.value),
-      this.state.files || []
-    );
+    this.props.createPost(this.md.render(this.state.value), this.state.files);
+    this.resetForm();
   };
 
   handleFileChange = (event) => {
@@ -33,14 +31,14 @@ class Editor extends Component {
   };
 
   resetForm = () => {
-    this.setState({ files: [], content: "" });
+    this.setState({ files: [], content: '' });
   };
 
   render() {
     return (
       <form onSubmit={this.handleSubmit} method="post" className="mb-1">
         <textarea
-          className="form-control"
+          className="form-control mb-3"
           name="content"
           cols={30}
           rows={3}
@@ -59,7 +57,7 @@ class Editor extends Component {
           />
           <label className="form-file-label" htmlFor="customFile">
             <span className="form-file-text">
-              Choose{" "}
+              Choose{' '}
               <svg
                 width="1em"
                 height="1em"
@@ -95,8 +93,8 @@ class Editor extends Component {
                 <div
                   className={
                     this.state.files[0].name === file.name
-                      ? "carousel-item active"
-                      : "carousel-item"
+                      ? 'carousel-item active'
+                      : 'carousel-item'
                   }
                   key={file.name}
                 >
@@ -109,28 +107,32 @@ class Editor extends Component {
                 </div>
               ))}
             </div>
-            <a
-              className="carousel-control-prev"
-              href="#carouselControls"
-              role="button"
-              data-slide="prev"
-            >
-              <span
-                className="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-            </a>
-            <a
-              className="carousel-control-next"
-              href="#carouselControls"
-              role="button"
-              data-slide="next"
-            >
-              <span
-                className="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-            </a>
+            {this.state.files.length > 1 && (
+              <>
+                <a
+                  className="carousel-control-prev"
+                  href="#carouselControls"
+                  role="button"
+                  data-slide="prev"
+                >
+                  <span
+                    className="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                </a>
+                <a
+                  className="carousel-control-next"
+                  href="#carouselControls"
+                  role="button"
+                  data-slide="next"
+                >
+                  <span
+                    className="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                </a>
+              </>
+            )}
           </div>
         )}
         <div className="row justify-content-evenly mt-4">
@@ -142,7 +144,7 @@ class Editor extends Component {
             className="col-2 btn btn-primary align-self-end"
             onClick={this.resetForm}
           >
-            Reset{" "}
+            Reset{' '}
             <svg
               width="1em"
               height="1em"
@@ -164,7 +166,7 @@ class Editor extends Component {
 }
 
 Editor.propTypes = {
-  createPost: PropTypes.func,
+  createPost: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

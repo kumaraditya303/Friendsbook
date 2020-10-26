@@ -1,11 +1,11 @@
-import cx from "classnames";
-import PropTypes from "prop-types";
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import Footer from "../../components/Footer";
-import { login } from "../../redux/auth/actions";
-import styles from "./style.module.scss";
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Footer from '../../components/Footer';
+import { login } from '../../redux/auth/actions';
+import styles from './style.module.scss';
 
 class Login extends Component {
   constructor(props) {
@@ -24,11 +24,11 @@ class Login extends Component {
     return (
       <Fragment>
         <div className="container jumbotron ">
-          <h1 className={cx(styles.h1, "text-center", "text-primary", "mb-5")}>
+          <h1 className={cx(styles.h1, 'text-center', 'text-primary', 'mb-5')}>
             Friendsbook
           </h1>
           <div className="d-flex justify-content-center h-100">
-            <div className={cx(styles.card, "text-center", "shadow")}>
+            <div className={cx(styles.card, 'text-center', 'shadow')}>
               {this.props.error && (
                 <div className="alert alert-danger fade show" role="alert">
                   {this.props.error.message}

@@ -2,17 +2,8 @@
   "name": "friendsbook",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kumaraditya303.github.io/Friendsbook/",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.5",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/bootstrap": "^5.0.0",
-    "@types/jest": "^26.0.14",
-    "@types/node": "^14.14.3",
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
-    "@types/react-redux": "^7.1.9",
-    "@types/react-router-dom": "^5.1.6",
     "axios": "^0.21.0",
     "bootstrap": "^5.0.0-alpha2",
     "classnames": "^2.2.6",
@@ -34,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "browserslist": {
     "production": [
@@ -50,6 +42,16 @@
   },
   "proxy": "http://127.0.0.1:8000",
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/bootstrap": "^5.0.0",
+    "@types/jest": "^26.0.14",
+    "@types/node": "^14.14.3",
+    "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.6",
     "@types/classnames": "^2.2.10",
     "@types/remarkable": "^1.7.4",
     "@typescript-eslint/eslint-plugin": "^4.5.0",

@@ -1,10 +1,10 @@
-import { Action } from "redux";
+import { Action } from 'redux';
 
 export enum AuthActionType {
-  START = "AUTH_START",
-  SUCCESS = "AUTH_SUCCESS",
-  FAIL = "AUTH_FAIL",
-  LOGOUT = "AUTH_LOGOUT",
+  START = 'AUTH_START',
+  SUCCESS = 'AUTH_SUCCESS',
+  FAIL = 'AUTH_FAIL',
+  LOGOUT = 'AUTH_LOGOUT',
 }
 
 export interface AuthAction extends Action<AuthActionType> {

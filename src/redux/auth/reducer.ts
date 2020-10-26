@@ -1,4 +1,4 @@
-import { AuthAction, AuthActionType, AuthState } from "./types";
+import { AuthAction, AuthActionType, AuthState } from './types';
 
 const State: AuthState = {
   authenticated: false,

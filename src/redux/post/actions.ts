@@ -1,7 +1,7 @@
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { POST_CREATE_URL, POST_URL } from "../../constants";
-import axios from "../../utils/axios";
-import { PostAction, PostActionType, PostState } from "./types";
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { POST_CREATE_URL, POST_URL } from '../../constants';
+import axios from '../../utils/axios';
+import { PostAction, PostActionType, PostState } from './types';
 
 export const fetchPosts = (): ThunkAction<
   void,
@@ -35,13 +35,13 @@ export const createPost = (
   for (const file of files) {
     body.append(`image${++count}`, file);
   }
-  body.append("content", content);
+  body.append('content', content);
 
   axios
     .post(POST_CREATE_URL, body, {
       headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Token ${localStorage.getItem("token")}`,
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Token ${localStorage.getItem('token')}`,
       },
     })
     .then(() => dispatch(fetchPosts()))
