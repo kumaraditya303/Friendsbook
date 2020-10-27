@@ -1,10 +1,10 @@
 import { AuthAction, AuthActionType, AuthState } from './types';
 
 const State: AuthState = {
-  authenticated: false,
+  authenticated: localStorage.getItem('token') !== null,
   error: null,
   loading: false,
-  user: {},
+  user: JSON.parse(localStorage.getItem('user')) ?? {},
 };
 
 const reducer = (state = State, action: AuthAction): AuthState => {

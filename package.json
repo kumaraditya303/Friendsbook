@@ -2,8 +2,8 @@
   "name": "friendsbook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kumaraditya303.github.io/Friendsbook/",
   "dependencies": {
+    "@types/react-helmet": "^6.1.0",
     "axios": "^0.21.0",
     "bootstrap": "^5.0.0-alpha2",
     "classnames": "^2.2.6",
@@ -12,6 +12,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-helmet": "^6.1.0",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.0",
@@ -26,7 +27,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "lint": "eslint **/*.{js,jsx,ts,tsx}"
   },
   "browserslist": {
     "production": [

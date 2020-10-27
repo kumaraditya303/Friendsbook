@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
@@ -27,7 +28,10 @@ class Register extends Component {
 
   render() {
     return (
-      <Fragment>
+      <>
+        <Helmet>
+          <title>Friendsbook - Register</title>
+        </Helmet>
         <div className="container jumbotron ">
           <h1 className={cx(styles.h1, 'text-center', 'text-primary', 'mb-5')}>
             Friendsbook
@@ -123,7 +127,7 @@ class Register extends Component {
           </div>
         </div>
         <Footer />
-      </Fragment>
+      </>
     );
   }
 }

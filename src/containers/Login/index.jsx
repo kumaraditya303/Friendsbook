@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import { login } from '../../redux/auth/actions';
 import styles from './style.module.scss';
-
+import { Helmet } from 'react-helmet';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +23,9 @@ class Login extends Component {
   render() {
     return (
       <Fragment>
+        <Helmet>
+          <title>Friendsbook - Login</title>
+        </Helmet>
         <div className="container jumbotron ">
           <h1 className={cx(styles.h1, 'text-center', 'text-primary', 'mb-5')}>
             Friendsbook

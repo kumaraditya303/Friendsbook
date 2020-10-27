@@ -28,6 +28,7 @@ export const login = (
     .then((res) => {
       const token = res.data.token;
       const user = res.data.user;
+
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
       dispatch({ type: AuthActionType.SUCCESS, authenticated: true, user });
@@ -61,19 +62,4 @@ export const register = (
     .catch((error) => {
       dispatch({ type: AuthActionType.FAIL, error, authenticated: false });
     });
-};
-
-export const autoLogin = (): ThunkAction<
-  void,
-  AuthState,
-  undefined,
-  AuthAction
-> => (dispatch: ThunkDispatch<AuthState, undefined, AuthAction>) => {
-  dispatch({ type: AuthActionType.START, authenticated: false });
-  const authenticated = localStorage.getItem('token');
-  const user = JSON.parse(localStorage.getItem('user'));
-  if (authenticated)
-    dispatch({ type: AuthActionType.SUCCESS, authenticated: true, user });
-  else
-    dispatch({ type: AuthActionType.FAIL, error: null, authenticated: false });
 };

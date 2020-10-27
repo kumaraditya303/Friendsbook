@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import Editor from '../../components/Editor/index';
 import PostMedia from '../../components/Post';
@@ -16,6 +17,12 @@ class Dashboard extends Component<Props> {
   render() {
     return (
       <>
+        <Helmet>
+          <title>
+            Welcome {this.props.user.first_name} {this.props.user.last_name}{' '}
+          </title>
+          <link rel="icon" href={this.props.user.image} type="image/x-icon" />
+        </Helmet>
         <div className="p-0 container-fluid row">
           <div className="col-md-4">
             <Sidebar />
