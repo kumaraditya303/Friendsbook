@@ -1,28 +1,30 @@
-import React, { Component } from 'react';
-import { Helmet } from 'react-helmet';
-import { connect } from 'react-redux';
-import Editor from '../../components/Editor/index';
-import PostMedia from '../../components/Post';
-import Sidebar from '../../components/Sidebar';
-import { RootState } from '../../redux/index';
-import { Post } from '../../redux/post/types';
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { AnyAction } from "redux"
+import { ThunkDispatch } from "redux-thunk"
+import Editor from "../components/Editor/index"
+import PostMedia from "../components/Post"
+import Sidebar from "../components/Sidebar"
+import { RootState } from "../redux/index"
+import { fetchPosts } from "../redux/post/actions"
+import { Post } from "../redux/post/types"
+import withPrivateRoute from "../utils/PrivateRoute"
 interface Props {
-  posts: Post[];
-  user: any;
-  loading: boolean;
+  posts: Post[]
+  user: any
+  loading: boolean
+  fetchPosts: () => void
 }
 
 class Dashboard extends Component<Props> {
-  state = {};
+  componentDidMount() {
+    this.props.fetchPosts()
+  }
+
+  state = {}
   render() {
     return (
       <>
-        <Helmet>
-          <title>
-            Welcome {this.props.user.first_name} {this.props.user.last_name}{' '}
-          </title>
-          <link rel="icon" href={this.props.user.image} type="image/x-icon" />
-        </Helmet>
         <div className="p-0 container-fluid row">
           <div className="col-md-4">
             <Sidebar />
@@ -34,7 +36,7 @@ class Dashboard extends Component<Props> {
               alt="..."
             />
             <span className="text-primary h4">
-              {this.props.user.first_name} {this.props.user.last_name}{' '}
+              {this.props.user.first_name} {this.props.user.last_name}{" "}
             </span>
             <span className="badge bg-dark">{new Date().toTimeString()}</span>
             <div className="media-body mt-3">
@@ -47,13 +49,13 @@ class Dashboard extends Component<Props> {
           <div>Loading...</div>
         ) : (
           <div className="container-fluid row mt-5">
-            {this.props.posts.map((post) => (
+            {this.props.posts.map(post => (
               <PostMedia post={post} key={post.id} />
             ))}
           </div>
         )}
       </>
-    );
+    )
   }
 }
 
@@ -61,6 +63,15 @@ const mapStateToProps = (state: RootState) => ({
   posts: state.post.posts,
   user: state.auth.user,
   loading: state.post.loading,
-});
+})
 
-export default connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<RootState, undefined, AnyAction>
+) => ({
+  fetchPosts: () => dispatch(fetchPosts()),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withPrivateRoute(Dashboard))

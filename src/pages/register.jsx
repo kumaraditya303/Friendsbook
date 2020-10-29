@@ -1,43 +1,40 @@
-import cx from 'classnames';
-import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
-import { Helmet } from 'react-helmet';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Footer from '../../components/Footer';
-import { register } from '../../redux/auth/actions';
-import styles from '../Login/style.module.scss';
+import cx from "classnames"
+import { Link } from "gatsby"
+import PropTypes from "prop-types"
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import styles from "../assets/style.module.scss"
+import Footer from "../components/Footer"
+import { register } from "../redux/auth/actions"
+import withPublicRoute from "../utils/PublicRoute"
 
 class Register extends Component {
   state = {
-    firstname: '',
-    lastname: '',
-    email: '',
-    password: '',
-    dob: '',
-  };
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    dob: "",
+  }
 
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const { firstname, lastname, email, password, dob } = this.state;
-    this.props.signup(firstname, lastname, email, password, dob);
-  };
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+  handleSubmit = event => {
+    event.preventDefault()
+    const { firstname, lastname, email, password, dob } = this.state
+    this.props.signup(firstname, lastname, email, password, dob)
+  }
 
   render() {
     return (
       <>
-        <Helmet>
-          <title>Friendsbook - Register</title>
-        </Helmet>
-        <div className="container jumbotron ">
-          <h1 className={cx(styles.h1, 'text-center', 'text-primary', 'mb-5')}>
+        <div className="container jumbotron">
+          <h1 className={cx(styles.h1, "text-center", "text-primary", "mb-5")}>
             Friendsbook
           </h1>
           <div className="d-flex justify-content-center h-100">
-            <div className={cx(styles.card, 'text-center', 'shadow')}>
+            <div className={cx(styles.card, "text-center", "shadow")}>
               {this.props.error && (
                 <div className="alert alert-danger fade show" role="alert">
                   {this.props.error.message}
@@ -120,7 +117,7 @@ class Register extends Component {
                 </form>
               </div>
               <div className="card-footer">
-                <Link to="/login/">Already have an account?</Link>
+                <Link to="/login">Already have an account?</Link>
                 <br />
               </div>
             </div>
@@ -128,23 +125,26 @@ class Register extends Component {
         </div>
         <Footer />
       </>
-    );
+    )
   }
 }
 Register.propTypes = {
   loading: PropTypes.bool,
   signup: PropTypes.func,
   error: PropTypes.object,
-};
+}
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   loading: state.auth.loading,
   error: state.auth.error,
   authenticated: state.auth.authenticated,
-});
+})
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   signup: (firstname, lastname, email, password, dob) =>
     dispatch(register(firstname, lastname, email, password, dob)),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+})
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withPublicRoute(Register))

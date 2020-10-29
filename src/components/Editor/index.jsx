@@ -1,38 +1,38 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Remarkable } from 'remarkable';
-import { linkify } from 'remarkable/linkify';
-import { createPost } from '../../redux/post/actions';
+import PropTypes from "prop-types"
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { Remarkable } from "remarkable"
+import { linkify } from "remarkable/linkify"
+import { createPost } from "../../redux/post/actions"
 class Editor extends Component {
   constructor(props) {
-    super(props);
-    this.md = new Remarkable().use(linkify);
+    super(props)
+    this.md = new Remarkable().use(linkify)
     this.state = {
       files: [],
-      value: 'Hello, **World**!',
-    };
+      value: "Hello, **World**!",
+    }
   }
-  handleChange = (event) => {
-    this.setState({ value: event.target.value });
-  };
+  handleChange = event => {
+    this.setState({ value: event.target.value })
+  }
 
-  getMarkup = () => ({ __html: this.md.render(this.state.value) });
+  getMarkup = () => ({ __html: this.md.render(this.state.value) })
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.createPost(this.md.render(this.state.value), this.state.files);
-    this.resetForm();
-  };
+  handleSubmit = event => {
+    event.preventDefault()
+    this.props.createPost(this.md.render(this.state.value), this.state.files)
+    this.resetForm()
+  }
 
-  handleFileChange = (event) => {
-    event.preventDefault();
-    this.setState({ files: [...event.target.files] });
-  };
+  handleFileChange = event => {
+    event.preventDefault()
+    this.setState({ files: [...event.target.files] })
+  }
 
   resetForm = () => {
-    this.setState({ files: [], content: '' });
-  };
+    this.setState({ files: [], content: "" })
+  }
 
   render() {
     return (
@@ -57,7 +57,7 @@ class Editor extends Component {
           />
           <label className="form-file-label" htmlFor="customFile">
             <span className="form-file-text">
-              Choose{' '}
+              Choose{" "}
               <svg
                 width="1em"
                 height="1em"
@@ -89,12 +89,12 @@ class Editor extends Component {
             data-ride="carousel"
           >
             <div className="carousel-inner">
-              {this.state.files.map((file) => (
+              {this.state.files.map(file => (
                 <div
                   className={
                     this.state.files[0].name === file.name
-                      ? 'carousel-item active'
-                      : 'carousel-item'
+                      ? "carousel-item active"
+                      : "carousel-item"
                   }
                   key={file.name}
                 >
@@ -144,7 +144,7 @@ class Editor extends Component {
             className="col-2 btn btn-primary align-self-end"
             onClick={this.resetForm}
           >
-            Reset{' '}
+            Reset{" "}
             <svg
               width="1em"
               height="1em"
@@ -161,16 +161,16 @@ class Editor extends Component {
           </button>
         </div>
       </form>
-    );
+    )
   }
 }
 
 Editor.propTypes = {
   createPost: PropTypes.func.isRequired,
-};
+}
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   createPost: (content, files) => dispatch(createPost(content, files)),
-});
+})
 
-export default connect(null, mapDispatchToProps)(Editor);
+export default connect(null, mapDispatchToProps)(Editor)

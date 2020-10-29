@@ -1,15 +1,15 @@
-import React from 'react';
-import { Post } from '../../redux/post/types';
+import React from "react"
+import { Post } from "../../redux/post/types"
 
 interface Props {
-  post: Post;
+  post: Post
 }
 
 const PostMedia: React.FC<Props> = (props: Props) => (
   <div className="media col-md-6 offset-md-5 p-4 border border-primary mb-5 post">
     <img className="mr-3 profile" src={props.post.user.image} alt="..." />
     <span className="text-primary h4">
-      {props.post.user.first_name} {props.post.user.last_name}{' '}
+      {props.post.user.first_name} {props.post.user.last_name}{" "}
     </span>
     <span className="badge bg-dark">
       {new Date(props.post.created).toTimeString()}
@@ -24,12 +24,12 @@ const PostMedia: React.FC<Props> = (props: Props) => (
         data-ride="carousel"
       >
         <div className="carousel-inner">
-          {props.post.images.map((file) => (
+          {props.post.images.map(file => (
             <div
               className={
                 props.post.images[0] === file
-                  ? 'carousel-item active'
-                  : 'carousel-item'
+                  ? "carousel-item active"
+                  : "carousel-item"
               }
               key={file.id}
             >
@@ -71,6 +71,6 @@ const PostMedia: React.FC<Props> = (props: Props) => (
       </div>
     )}
   </div>
-);
+)
 
-export default PostMedia;
+export default PostMedia

@@ -1,11 +1,13 @@
-import { AuthAction, AuthActionType, AuthState } from './types';
+import { AuthAction, AuthActionType, AuthState } from "./types"
 
 const State: AuthState = {
-  authenticated: localStorage.getItem('token') !== null,
+  authenticated:
+    typeof window !== `undefined` && localStorage.getItem("token") !== null,
   error: null,
   loading: false,
-  user: JSON.parse(localStorage.getItem('user')) ?? {},
-};
+  user:
+    typeof window !== `undefined` && JSON.parse(localStorage.getItem("token")),
+}
 
 const reducer = (state = State, action: AuthAction): AuthState => {
   switch (action.type) {
@@ -15,26 +17,26 @@ const reducer = (state = State, action: AuthAction): AuthState => {
         error: null,
         loading: true,
         authenticated: action.authenticated,
-      };
+      }
     case AuthActionType.SUCCESS:
       return {
         ...state,
         authenticated: action.authenticated,
         loading: false,
         user: action.user,
-      };
+      }
     case AuthActionType.FAIL:
       return {
         ...state,
         error: action.error,
         loading: false,
         authenticated: action.authenticated,
-      };
+      }
     case AuthActionType.LOGOUT:
-      return { ...state, user: {}, authenticated: action.authenticated };
+      return { ...state, user: {}, authenticated: action.authenticated }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default reducer;
+export default reducer

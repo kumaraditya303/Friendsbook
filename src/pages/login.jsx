@@ -1,37 +1,35 @@
-import cx from 'classnames';
-import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Footer from '../../components/Footer';
-import { login } from '../../redux/auth/actions';
-import styles from './style.module.scss';
-import { Helmet } from 'react-helmet';
+import cx from "classnames"
+import { Link } from "gatsby"
+import PropTypes from "prop-types"
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import styles from "../assets/style.module.scss"
+import Footer from "../components/Footer"
+import { login } from "../redux/auth/actions"
+import withPublicRoute from "../utils/PublicRoute"
+
 class Login extends Component {
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const { email, password } = this.state;
-    this.props.login(email, password);
-  };
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+  handleSubmit = event => {
+    event.preventDefault()
+    const { email, password } = this.state
+    this.props.login(email, password)
+  }
   render() {
     return (
-      <Fragment>
-        <Helmet>
-          <title>Friendsbook - Login</title>
-        </Helmet>
+      <>
         <div className="container jumbotron ">
-          <h1 className={cx(styles.h1, 'text-center', 'text-primary', 'mb-5')}>
+          <h1 className={cx(styles.h1, "text-center", "text-primary", "mb-5")}>
             Friendsbook
           </h1>
           <div className="d-flex justify-content-center h-100">
-            <div className={cx(styles.card, 'text-center', 'shadow')}>
+            <div className={cx(styles.card, "text-center", "shadow")}>
               {this.props.error && (
                 <div className="alert alert-danger fade show" role="alert">
                   {this.props.error.message}
@@ -86,8 +84,8 @@ class Login extends Component {
           </div>
         </div>
         <Footer />
-      </Fragment>
-    );
+      </>
+    )
   }
 }
 
@@ -95,15 +93,18 @@ Login.propTypes = {
   login: PropTypes.func,
   error: PropTypes.object,
   loading: PropTypes.bool,
-};
+}
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   loading: state.auth.loading,
   error: state.auth.error,
   authenticated: state.auth.authenticated,
-});
-const mapDispatchToProps = (dispatch) => ({
+})
+const mapDispatchToProps = dispatch => ({
   login: (email, password) => dispatch(login(email, password)),
-});
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withPublicRoute(Login))

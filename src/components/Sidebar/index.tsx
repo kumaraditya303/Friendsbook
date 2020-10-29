@@ -1,14 +1,14 @@
-import React from 'react';
-import './style.scss';
-import PropTypes from 'prop-types';
-import { ThunkDispatch } from 'redux-thunk';
-import { RootState } from '../../redux';
-import { AnyAction } from 'redux';
-import { logout } from '../../redux/auth/actions';
-import { connect } from 'react-redux';
+import React from "react"
+import "./style.scss"
+import PropTypes from "prop-types"
+import { ThunkDispatch } from "redux-thunk"
+import { RootState } from "../../redux"
+import { AnyAction } from "redux"
+import { logout } from "../../redux/auth/actions"
+import { connect } from "react-redux"
 interface Props {
-  user: any;
-  logOut: () => void;
+  user: any
+  logOut: () => void
 }
 const Sidebar: React.FC<Props> = ({ user, logOut }) => {
   return (
@@ -77,20 +77,20 @@ const Sidebar: React.FC<Props> = ({ user, logOut }) => {
         </div>
       </nav>
     </div>
-  );
-};
+  )
+}
 
 Sidebar.propTypes = {
   user: PropTypes.object.isRequired,
   logOut: PropTypes.func.isRequired,
-};
+}
 
-const mapStateToProps = (state: RootState) => ({ user: state.auth.user });
+const mapStateToProps = (state: RootState) => ({ user: state.auth.user })
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<RootState, undefined, AnyAction>
 ) => ({
   logOut: () => dispatch(logout()),
-});
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar)

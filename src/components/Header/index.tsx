@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react"
 
 const Header: React.FunctionComponent = () => (
   <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -52,6 +52,6 @@ const Header: React.FunctionComponent = () => (
       </form>
     </div>
   </nav>
-);
+)
 
-export default Header;
+export default Header

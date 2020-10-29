@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './style.module.scss';
+import React from "react"
+import styles from "./style.module.scss"
 
 const Footer: React.FunctionComponent = () => (
   <div className="container">
@@ -8,6 +8,6 @@ const Footer: React.FunctionComponent = () => (
       <p>&copy; {new Date().getFullYear()} - Friendsbook</p>
     </footer>
   </div>
-);
+)
 
-export default Footer;
+export default Footer
