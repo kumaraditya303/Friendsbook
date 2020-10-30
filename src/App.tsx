@@ -53,13 +53,15 @@ class App extends Component<Props> {
             }
           >
             <Switch>
-              <PublicRoute exact path="/login/:next?/" component={Login} />
-              <PublicRoute
-                exact
-                path="/register/:next?/"
-                component={Register}
-              />
-              <PrivateRoute exact path="/" component={Dashboard} />
+              <PublicRoute exact path="/login">
+                <Login />
+              </PublicRoute>
+              <PublicRoute exact path="/register">
+                <Register />
+              </PublicRoute>
+              <PrivateRoute path="/">
+                <Dashboard />
+              </PrivateRoute>
             </Switch>
           </Suspense>
         </BrowserRouter>

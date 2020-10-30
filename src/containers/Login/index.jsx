@@ -95,6 +95,7 @@ Login.propTypes = {
   login: PropTypes.func,
   error: PropTypes.object,
   loading: PropTypes.bool,
+  location: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({

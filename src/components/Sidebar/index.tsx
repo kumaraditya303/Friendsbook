@@ -6,6 +6,7 @@ import { RootState } from '../../redux';
 import { AnyAction } from 'redux';
 import { logout } from '../../redux/auth/actions';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 interface Props {
   user: any;
   logOut: () => void;
@@ -66,7 +67,7 @@ const Sidebar: React.FC<Props> = ({ user, logOut }) => {
               </ul>
             </li>
             <li>
-              <a href="#">Portfolio</a>
+              <Link to="/portfolio">Portfolio</Link>
             </li>
             <li>
               <a href="#" onClick={logOut}>
