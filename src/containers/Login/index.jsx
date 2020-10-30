@@ -26,7 +26,7 @@ class Login extends Component {
         <Helmet>
           <title>Friendsbook - Login</title>
         </Helmet>
-        <div className="container jumbotron ">
+        <div className="container jumbotron">
           <h1 className={cx(styles.h1, 'text-center', 'text-primary', 'mb-5')}>
             Friendsbook
           </h1>

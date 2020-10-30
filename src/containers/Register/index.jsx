@@ -32,12 +32,12 @@ class Register extends Component {
         <Helmet>
           <title>Friendsbook - Register</title>
         </Helmet>
-        <div className="container jumbotron ">
+        <div className="container jumbotron">
           <h1 className={cx(styles.h1, 'text-center', 'text-primary', 'mb-5')}>
             Friendsbook
           </h1>
           <div className="d-flex justify-content-center h-100">
-            <div className={cx(styles.card, 'text-center', 'shadow')}>
+            <div className={cx(styles.card, 'text-center')}>
               {this.props.error && (
                 <div className="alert alert-danger fade show" role="alert">
                   {this.props.error.message}
@@ -91,9 +91,7 @@ class Register extends Component {
                   />
                   <br />
                   <div className="input-group">
-                    <div className="input-group-prepend">
-                      <div className="input-group-text">Date of birth</div>
-                    </div>
+                    <span className="input-group-text">Date of birth</span>
                     <input
                       type="date"
                       name="dob"

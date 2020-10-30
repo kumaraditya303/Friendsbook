@@ -2,7 +2,13 @@
 $font-family-sans-serif: 'Ubuntu', sans-serif;
 $carousel-control-color: #000;
 $primary: #d63384;
-
+$border-radius: 1.5rem;
+$enable-shadows: true;
+$enable-gradients: true;
+.card-img {
+  max-width: 150px;
+  max-height: 150px;
+}
 .profile {
   width: 48px;
   height: 48px;
@@ -20,6 +26,7 @@ $primary: #d63384;
 
 // Layout & components
 @import '~bootstrap/scss/root';
+@import '~bootstrap/scss/alert';
 @import '~bootstrap/scss/reboot';
 @import '~bootstrap/scss/type';
 @import '~bootstrap/scss/images';

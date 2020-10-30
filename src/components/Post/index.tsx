@@ -6,7 +6,7 @@ interface Props {
 }
 
 const PostMedia: React.FC<Props> = (props: Props) => (
-  <div className="media col-md-6 offset-md-5 p-4 border border-primary mb-5 post">
+  <div className="media col-md-7 offset-md-4 p-4 border border-primary mb-5 post">
     <img className="mr-3 profile" src={props.post.user.image} alt="..." />
     <span className="text-primary h4">
       {props.post.user.first_name} {props.post.user.last_name}{' '}

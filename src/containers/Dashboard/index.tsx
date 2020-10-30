@@ -43,7 +43,7 @@ class Dashboard extends Component<Props> {
                 <div className="col-md-4">
                   <Sidebar />
                 </div>
-                <div className="media mt-5 col-md-6 offset-xl-1 p-4 border border-primary post">
+                <div className="media mt-5 col-md-7 p-4 border border-primary post">
                   <img
                     className="mr-3 profile"
                     src={this.props.user.image}
@@ -59,7 +59,9 @@ class Dashboard extends Component<Props> {
                     <Editor />
                   </div>
                 </div>
-                <h2 className="col-md-6 offset-md-5 mt-5">Latest Posts</h2>
+                <div className="row">
+                  <h2 className="col-md-8 offset-md-4  mt-5">Latest Posts</h2>
+                </div>
               </div>
               {this.props.loading ? (
                 <div>Loading...</div>
