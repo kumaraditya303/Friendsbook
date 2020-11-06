@@ -1,13 +1,13 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
+import '../../index.scss';
 import { register } from '../../redux/auth/actions';
 import styles from '../Login/style.module.scss';
-
 class Register extends Component {
   state = {
     firstname: '',

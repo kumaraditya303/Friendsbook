@@ -16,14 +16,12 @@ class UserSerializer(ModelSerializer):
         """
         Function to create User.
         """
-        image = validated_data.pop('image', None)
-        if image:
-            image._set_name(str(uuid.uuid4()))
+
         user = get_user_model().objects.create(**validated_data)
-        user.image = image
         user.set_password(validated_data["password"])
         user.save()
         return user
+
 
     class Meta:
         model = get_user_model()

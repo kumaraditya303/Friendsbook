@@ -7,6 +7,7 @@ import PostMedia from '../../components/Post';
 import Sidebar from '../../components/Sidebar';
 import { RootState } from '../../redux/index';
 import { Post } from '../../redux/post/types';
+import '../../index.scss';
 const Portfolio = lazy(
   () => import(/* webpackChunkName: "portfolio" */ '../../components/Portfolio')
 );

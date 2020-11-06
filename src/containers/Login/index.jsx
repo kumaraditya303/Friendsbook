@@ -1,12 +1,13 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
+import '../../index.scss';
 import { login } from '../../redux/auth/actions';
 import styles from './style.module.scss';
-import { Helmet } from 'react-helmet';
 class Login extends Component {
   constructor(props) {
     super(props);

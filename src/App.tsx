@@ -19,6 +19,8 @@ const Register = lazy(
   () => import(/* webpackChunkName: "register" */ './containers/Register')
 );
 
+const Chat = lazy(() => import('./components/Chat'));
+
 interface Props {
   fetchPosts: () => void;
 }
@@ -59,6 +61,9 @@ class App extends Component<Props> {
               <PublicRoute exact path="/register">
                 <Register />
               </PublicRoute>
+              <PrivateRoute exact path="/chat">
+                <Chat />
+              </PrivateRoute>
               <PrivateRoute path="/">
                 <Dashboard />
               </PrivateRoute>
