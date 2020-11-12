@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.core.checks import messages
 from django.db import models
 from django.contrib.auth import get_user_model

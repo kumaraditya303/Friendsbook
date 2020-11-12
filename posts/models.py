@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator
 from django.db import models
@@ -12,9 +13,7 @@ class Post(models.Model):
     created = models.DateTimeField(_("created"), auto_now=True)
 
     class Meta:
-        ordering = [
-            "-created",
-        ]
+        ordering = ["-created"]
         verbose_name = _("Post")
         verbose_name_plural = _("Posts")
 
@@ -28,12 +27,9 @@ class Image(models.Model):
     created = models.DateTimeField(_("created"), auto_now=True)
 
     class Meta:
-        ordering = [
-            "-created",
-        ]
+        ordering = ["-created"]
         verbose_name = _("Image")
         verbose_name_plural = _("Images")
 
     def __str__(self):
         return self.image.url
-

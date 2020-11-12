@@ -1,4 +1,4 @@
-FROM node:15.0.1-buster-slim as buildnode
+FROM node:15.2.0-buster-slim as buildnode
 ENV NODE_ENV production
 WORKDIR /code
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
@@ -7,7 +7,7 @@ COPY . /code
 RUN npm test -- --watchAll=false
 RUN npm run build
 
-FROM python:3.9.0-slim-buster 
+FROM python:3.9.0-slim-buster
 EXPOSE 8000
 
 # Keeps Python from generating .pyc files in the container
@@ -27,4 +27,3 @@ RUN rm -rf public src package.json package-lock.json pytest.ini requirements.txt
 RUN useradd appuser && chown -R appuser /app
 USER appuser
 CMD [ "python" ,"manage.py","runserver" ]
-

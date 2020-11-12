@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
     API Views for accounts app.
 """
@@ -21,12 +22,8 @@ class RegistrationAPIView(CreateAPIView):
     """
 
     model = get_user_model()
-    authentication_classes = [
-        TokenAuthentication,
-    ]
-    permission_classes = [
-        AllowAny,
-    ]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [AllowAny]
     serializer_class = UserSerializer
 
     def post(self, request, *args, **kwargs):
@@ -39,12 +36,8 @@ class LogoutAPIView(APIView):
     API View for User logout.
     """
 
-    authentication_classes = [
-        TokenAuthentication,
-    ]
-    permission_classes = [
-        IsAuthenticated,
-    ]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, **kwargs):
         request.user.auth_token.delete()

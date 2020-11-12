@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from channels.generic.websocket import WebsocketConsumer
 
 

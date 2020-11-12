@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "/home/kumaraditya/.local/share/virtualenvs/Friendsbook-D1SJqEa9/bin/python",
-    "python.formatting.provider": "black",
+  "python.pythonPath": "/home/kumaraditya/.local/share/virtualenvs/Friendsbook-D1SJqEa9/bin/python",
+  "python.formatting.provider": "black"
 }

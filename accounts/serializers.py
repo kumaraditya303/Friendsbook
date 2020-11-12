@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
     Serializers for accounts app.
 """
@@ -22,11 +23,9 @@ class UserSerializer(ModelSerializer):
         user.save()
         return user
 
-
     class Meta:
         model = get_user_model()
-        fields = ("first_name", "last_name", "email",
-                  "password", "dob", "image")
+        fields = ("first_name", "last_name", "email", "password", "dob", "image")
         extra_kwargs = {
             "password": {"write_only": True},
             "image": {"required": False},
