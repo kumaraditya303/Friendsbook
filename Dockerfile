@@ -1,4 +1,4 @@
-FROM node:15.2.0-buster-slim as buildnode
+FROM node:15.2.1-buster-slim as buildnode
 ENV NODE_ENV production
 WORKDIR /code
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
