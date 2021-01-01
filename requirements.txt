@@ -12,7 +12,7 @@ django==3.1.4
 djangorestaccounts==0.1.2
 djangorestframework==3.12.2
 hyperlink==20.0.1
-idna==2.10; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
+idna==3.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 incremental==17.5.0
 pillow==8.0.1
 pyasn1==0.4.8
