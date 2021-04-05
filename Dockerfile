@@ -7,7 +7,7 @@ COPY . /code
 RUN npm test -- --watchAll=false
 RUN npm run build
 
-FROM python:3.9.1-slim-buster
+FROM python:3.9.3-slim-buster
 EXPOSE 8000
 
 # Keeps Python from generating .pyc files in the container
